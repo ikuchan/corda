@@ -67,7 +67,6 @@ private constructor(
     private var serializedReferences: List<SerializedStateAndRef>? = null
 
     init {
-        checkBaseInvariants()
         if (timeWindow != null) check(notary != null) { "Transactions with time-windows must be notarised" }
         checkNotaryWhitelisted()
     }
@@ -191,7 +190,9 @@ private constructor(
                     privacySalt = this.privacySalt,
                     networkParameters = this.networkParameters,
                     references = deserializedReferences
-            )
+            ).apply {
+                this.checkBaseInvariants()
+            }
         } else {
             // This branch is only present for backwards compatibility.
             logger.warn("The LedgerTransaction should not be instantiated directly from client code. Please use WireTransaction.toLedgerTransaction." +
