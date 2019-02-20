@@ -57,9 +57,9 @@ class NewCommand : CommandBase() {
         val TEMPLATE = """
             |package net.corda.djvm;
             |
-            |import net.corda.djvm.execution.SandboxedRunnable;
+            |import java.util.Function.SandboxedRunnable;
             |
-            |public class [NAME] implements SandboxedRunnable<[FROM], [TO]> {
+            |public class [NAME] implements Function<[FROM], [TO]> {
             |    @Override
             |    public [TO] run([FROM] input) {
             |        return [RETURN];
